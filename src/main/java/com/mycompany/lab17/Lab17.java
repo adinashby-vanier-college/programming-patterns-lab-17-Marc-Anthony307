@@ -20,7 +20,8 @@ public class Lab17 {
         try {
             DatabaseManager.initialize();
 
-            addSampleBooks();
+            Book newBook = new Book("Harry Potter", "JK Rowling", 45);
+            DatabaseManager.addBook(newBook);
 
             Library library = Library.getInstance();
             DatabaseManager.loadBooks(library);
@@ -36,12 +37,5 @@ public class Lab17 {
         }
     }
 
-    private static void addSampleBooks() {
-        try {
-            Book book = new Book("Harry Potter", "JK Rowling", 45);
-            DatabaseManager.addBook(book);
-        } catch (Exception e) {
-            e.printStackTrace(); // This will print any exceptions that occur during book addition
-        }
-    }
+    
 }

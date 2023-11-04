@@ -17,7 +17,7 @@ import java.sql.Statement;
  */
 public class DatabaseManager {
 
-    private static final String DATABASE_URL = "jdbc:sqlite:D:\\Programming-Patterns\\Lab17\\LibrarySystem.db";
+    private static final String DATABASE_URL = "jdbc:sqlite:src/main/resources/LibrarySystem.db";
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DATABASE_URL);
@@ -26,12 +26,12 @@ public class DatabaseManager {
     public static void addBook(Book book) {
         String sql = "INSERT INTO books(name, author, stock) VALUES(?, ?, ?)";
 
-        try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection connection = getConnection(); PreparedStatement pstatement = connection.prepareStatement(sql)) {
 
-            pstmt.setString(1, book.getName());
-            pstmt.setString(2, book.getAuthor());
-            pstmt.setInt(3, book.getStock());
-            pstmt.executeUpdate();
+            pstatement.setString(1, book.getName());
+            pstatement.setString(2, book.getAuthor());
+            pstatement.setInt(3, book.getStock());
+            pstatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -44,8 +44,8 @@ public class DatabaseManager {
                 + "author TEXT NOT NULL,"
                 + "stock INTEGER NOT NULL)";
 
-        try (Connection conn = getConnection(); Statement stmt = conn.createStatement()) {
-            stmt.execute(sqlCreateTable);
+        try (Connection connection = getConnection(); Statement statement = connection.createStatement()) {
+            statement.execute(sqlCreateTable);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -54,7 +54,7 @@ public class DatabaseManager {
     public static void loadBooks(Library library) {
         String sqlSelectAllBooks = "SELECT * FROM books";
 
-        try (Connection conn = getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sqlSelectAllBooks)) {
+        try (Connection connection = getConnection(); Statement statement = connection.createStatement(); ResultSet rs = statement.executeQuery(sqlSelectAllBooks)) {
 
             while (rs.next()) {
                 Book book = new Book(
