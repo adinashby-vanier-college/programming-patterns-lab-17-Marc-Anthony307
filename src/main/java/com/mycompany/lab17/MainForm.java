@@ -25,7 +25,7 @@ public class MainForm extends javax.swing.JFrame implements LibraryObserver {
      */
     public MainForm() {
         initComponents();
-
+        
         Library.getInstance().registerObserver(this);
 
         bundle = ResourceBundle.getBundle("FormLanguage");
@@ -192,8 +192,10 @@ public class MainForm extends javax.swing.JFrame implements LibraryObserver {
         String name = bookName.getText();
         String author = authorName.getText();
         int stock = Integer.parseInt(bookStock.getText());
-
+        Book newBook = new Book(name, author, stock);
+        
         libraryController.addBook(name, author, stock);
+        DatabaseManager.addBook(newBook);
     }//GEN-LAST:event_addBookButtonActionPerformed
 
     private void languageBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_languageBoxActionPerformed
@@ -247,15 +249,15 @@ public class MainForm extends javax.swing.JFrame implements LibraryObserver {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Library library = Library.getInstance();
-                library.addBook(new Book("Harry Potter", "JK Rowling", 45));
-
-                Controller controller = Controller.getInstance();
-                MainForm mainForm = new MainForm();
-                controller.setMainFormView(mainForm);
-                LibraryController libraryController = new LibraryController(library, mainForm);
-                mainForm.setLibraryController(libraryController);
-                mainForm.setVisible(true);
+//                Library library = Library.getInstance();
+//                library.addBook(new Book("Harry Potter", "JK Rowling", 45));
+//
+//                Controller controller = Controller.getInstance();
+//                MainForm mainForm = new MainForm();
+//                controller.setMainFormView(mainForm);
+//                LibraryController libraryController = new LibraryController(library, mainForm);
+//                mainForm.setLibraryController(libraryController);
+//                mainForm.setVisible(true);
 
             }
         });

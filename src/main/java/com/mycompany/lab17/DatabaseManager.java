@@ -68,4 +68,16 @@ public class DatabaseManager {
         }
 
     }
+
+    public static void clearBooks() {
+        String sqlDeleteAllBooks = "DELETE FROM books";
+
+        try (Connection connection = getConnection(); Statement statement = connection.createStatement()) {
+            statement.executeUpdate(sqlDeleteAllBooks);
+            System.out.println("All books have been removed from the database.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

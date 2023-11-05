@@ -19,9 +19,11 @@ public class Lab17 {
     public static void main(String[] args) {
         try {
             DatabaseManager.initialize();
+            
+//            DatabaseManager.clearBooks();
 
-            Book newBook = new Book("Harry Potter", "JK Rowling", 45);
-            DatabaseManager.addBook(newBook);
+//            Book newBook = new Book("Harry Potter", "JK Rowling", 45);
+//            DatabaseManager.addBook(newBook);
 
             Library library = Library.getInstance();
             DatabaseManager.loadBooks(library);
@@ -30,6 +32,8 @@ public class Lab17 {
             LibraryController libraryController = new LibraryController(library, mainForm);
             mainForm.setLibraryController(libraryController); 
 
+            libraryController.updateView();
+            
             mainForm.setVisible(true);
 
         } catch (Exception e) {
